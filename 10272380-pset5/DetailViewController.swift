@@ -43,30 +43,44 @@ class DetailViewController: UIViewController {
     }
     
     func insertNewObject(_ sender: Any) {
-        let alertController = UIAlertController(title: "New item", message: "Please provide a title for the item:", preferredStyle: .alert)
-        var title = String()
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
-            if let field = alertController.textFields![0] as? UITextField {
-                // store your data
-                title = field.text!
-                self.todoManager.createItem(listId: self.listId!, title: title, index: self.listIndex!)
-                self.tableView.reloadData()
-            } else {
-                // user did not fill field
-                print("No input given!")
+        if list != nil {
+            let alertController = UIAlertController(title: "New item", message: "Please provide a title for the item:", preferredStyle: .alert)
+            var title = String()
+            let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+                if let field = alertController.textFields![0] as? UITextField {
+                    // store your data
+                    title = field.text!
+                    self.todoManager.createItem(listId: self.listId!, title:    title, index: self.listIndex!)
+                    self.tableView.reloadData()
+                } else {
+                    // user did not fill field
+                    print("No input given!")
+                }
             }
+        
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)   { (_) in }
+        
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Title"
+            }
+        
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+        
+            self.present(alertController, animated: true, completion: nil)
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
-        
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Title"
+    }
+    
+    func todoCompletionTapped(cell: ItemCell) {
+        //Get the indexpath of cell where button was tapped
+        let itemId = cell.itemId
+        do {
+            try todoManager.setCompletion(itemId: itemId!)
+            print("tried updating completion")
+            tableView.reloadData()
+        } catch  {
+            print(error)
         }
-        
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
     }
 
 
@@ -75,7 +89,12 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (list?.getList().count)!
+        if let rows = list?.getList().count {
+            return rows
+        }
+        else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

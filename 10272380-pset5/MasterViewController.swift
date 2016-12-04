@@ -102,6 +102,12 @@ class MasterViewController: UITableViewController {
         cell.listId = listId
         cell.title.text = title
         
+        if(cell.isSelected){
+            cell.backgroundColor = UIColor.cyan
+        }else{
+            cell.backgroundColor = UIColor.clear
+        }
+        
         return cell
     }
 

@@ -17,6 +17,7 @@
 		393E09331DED938900661030 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E09321DED938900661030 /* TodoItem.swift */; };
 		393E09351DED946000661030 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E09341DED946000661030 /* TodoList.swift */; };
 		393E09371DED95DF00661030 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393E09361DED95DF00661030 /* TodoManager.swift */; };
+		394420F41DF46319004B6DFF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394420F31DF46319004B6DFF /* Extensions.swift */; };
 		39D2E3F01DF18CD00008D80D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D2E3EF1DF18CD00008D80D /* ListCell.swift */; };
 		39D2E3F21DF1B8710008D80D /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D2E3F11DF1B8710008D80D /* ItemCell.swift */; };
 		A1C7583C4218699BCB44FC69 /* Pods_10272380_pset5.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C03983D4B281639FC59379 /* Pods_10272380_pset5.framework */; };
@@ -35,6 +36,7 @@
 		393E09321DED938900661030 /* TodoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		393E09341DED946000661030 /* TodoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
 		393E09361DED95DF00661030 /* TodoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
+		394420F31DF46319004B6DFF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		39D2E3EF1DF18CD00008D80D /* ListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		39D2E3F11DF1B8710008D80D /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		69C03983D4B281639FC59379 /* Pods_10272380_pset5.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_10272380_pset5.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				393E09361DED95DF00661030 /* TodoManager.swift */,
 				39D2E3EF1DF18CD00008D80D /* ListCell.swift */,
 				39D2E3F11DF1B8710008D80D /* ItemCell.swift */,
+				394420F31DF46319004B6DFF /* Extensions.swift */,
 			);
 			path = "10272380-pset5";
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				39D2E3F21DF1B8710008D80D /* ItemCell.swift in Sources */,
 				393E09211DED8C8B00661030 /* DetailViewController.swift in Sources */,
 				393E09351DED946000661030 /* TodoList.swift in Sources */,
+				394420F41DF46319004B6DFF /* Extensions.swift in Sources */,
 				393E091F1DED8C8B00661030 /* MasterViewController.swift in Sources */,
 				39D2E3F01DF18CD00008D80D /* ListCell.swift in Sources */,
 				393E091D1DED8C8B00661030 /* AppDelegate.swift in Sources */,
@@ -285,6 +289,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -334,6 +339,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

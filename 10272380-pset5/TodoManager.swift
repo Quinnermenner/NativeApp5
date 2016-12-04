@@ -145,8 +145,13 @@ class TodoManager {
         return self.TodoListList[listIndex]
     }
     
-    func setCompletion(itemId: Int64) {
-        
+    func setCompletion(itemId: Int64) throws {
+        do {
+            try db?.updateCompletion(itemId: itemId)
+            print("tried to set completion")
+        } catch  {
+            throw error
+        }
         
     }
 }

@@ -8,12 +8,37 @@
 
 import UIKit
 
+protocol ItemCellDelegate {
+    func todoCompletionTapped(cell: ItemCell)
+}
+
 class ItemCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var completionCheck: UIButton!
     var listId: Int64?
     var itemId: Int64?
     var completion: Bool?
+    var delegate: ItemCellDelegate?
+    
+
+    @IBAction func todoCompletionTapped(_ sender: Any) {
+        if let _ = delegate {
+            delegate?.todoCompletionTapped(cell: self)
+            updateImage()
+        }
+        
+    }
+    
+    func updateImage() {
+        if completion == true {
+            completionCheck.setImage(UIImage(named: "checkMark"), for: .normal)
+        }
+        else {
+            completionCheck.setImage(nil, for: .normal)
+        }
+        
+    }
     
     
     override func awakeFromNib() {
