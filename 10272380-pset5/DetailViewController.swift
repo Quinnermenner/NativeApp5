@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
+        self.list = todoManager.getItemList(listIndex: listIndex!)
         self.configureView()
     }
 
@@ -43,41 +44,41 @@ class DetailViewController: UIViewController {
     }
     
     func insertNewObject(_ sender: Any) {
-        if list != nil {
-            let alertController = UIAlertController(title: "New item", message: "Please provide a title for the item:", preferredStyle: .alert)
-            var title = String()
-            let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
-                if let field = alertController.textFields![0] as? UITextField {
-                    // store your data
-                    title = field.text!
-                    self.todoManager.createItem(listId: self.listId!, title:    title, index: self.listIndex!)
-                    self.tableView.reloadData()
-                } else {
-                    // user did not fill field
-                    print("No input given!")
-                }
+        let alertController = UIAlertController(title: "New item", message: "Please provide a title for the item:", preferredStyle: .alert)
+        var title = String()
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+            if let field = alertController.textFields![0] as? UITextField {
+                // store your data
+                title = field.text!
+                self.todoManager.createItem(listId: self.listId!, title:    title, index: self.listIndex!)
+                self.tableView.reloadData()
+            } else {
+                // user did not fill field
+                print("No input given!")
             }
-        
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)   { (_) in }
-        
-            alertController.addTextField { (textField) in
-                textField.placeholder = "Title"
-            }
-        
-            alertController.addAction(confirmAction)
-            alertController.addAction(cancelAction)
-        
-            self.present(alertController, animated: true, completion: nil)
         }
+    
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)   { (_) in }
+    
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Title"
+        }
+    
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+    
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func todoCompletionTapped(cell: ItemCell) {
         //Get the indexpath of cell where button was tapped
+        let indexPath = self.tableView.indexPath(for: cell)
         let itemId = cell.itemId
         do {
-            try todoManager.setCompletion(itemId: itemId!)
-            print("tried updating completion")
+            try todoManager.setCompletion(itemId: itemId!, listIndex: listIndex!, index: (indexPath?.row)!)
             tableView.reloadData()
+            
+            tableView.reloadRows(at: [indexPath!], with: .none)
         } catch  {
             print(error)
         }
@@ -86,20 +87,16 @@ class DetailViewController: UIViewController {
 
 }
 
-extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+extension DetailViewController: UITableViewDelegate, UITableViewDataSource, ItemCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let rows = list?.getList().count {
-            return rows
-        }
-        else {
-            return 0
-        }
+            return todoManager.getItemList(listIndex: listIndex!).getItemCount()
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") as! ItemCell
-        let itemList = list!.getList()
+        let itemList = todoManager.getItemList(listIndex: listIndex!).getList()
         let item = itemList[indexPath.row]
         let title = item.getTitle()
         let completion = item.getCompletion()
@@ -110,6 +107,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         cell.completion = completion
         cell.itemId = itemId
         cell.listId = listId
+        cell.delegate = self
         
         return cell
     }

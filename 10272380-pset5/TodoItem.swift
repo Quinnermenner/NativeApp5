@@ -11,7 +11,7 @@ import Foundation
 class TodoItem {
     
     private let title: String?
-    private let completion: Bool?
+    private var completion: Bool?
     private let listId: Int64?
     private let itemId: Int64?
     
@@ -42,4 +42,13 @@ class TodoItem {
         return self.listId!
     }
     
+    func setCompletion() {
+        
+        if self.completion == true {
+            self.completion = false
+        }
+        else {
+            self.completion = true
+        }
+    }
 }

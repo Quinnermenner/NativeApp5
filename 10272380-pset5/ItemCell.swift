@@ -31,7 +31,7 @@ class ItemCell: UITableViewCell {
     }
     
     func updateImage() {
-        if completion == true {
+        if completion! == true {
             completionCheck.setImage(UIImage(named: "checkMark"), for: .normal)
         }
         else {

@@ -171,13 +171,13 @@ class DataBaseHelper {
             
             for completionCheck in try db!.prepare(todoItem) {
                 if completionCheck[completion] == false {
-                    if try db!.run(todoItem.update(self.completion <- false)) > 0 {
-                        print("Updated completion to false")
+                    if try db!.run(todoItem.update(self.completion <- true)) > 0 {
+                        print("Updated completion to true")
                     }
                 }
                 else {
-                    if try db!.run(todoItem.update(self.completion <- true)) > 0 {
-                        print("Updated completion to true")
+                    if try db!.run(todoItem.update(self.completion <- false)) > 0 {
+                        print("Updated completion to false")
                     }
                 }
             }

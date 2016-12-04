@@ -145,10 +145,10 @@ class TodoManager {
         return self.TodoListList[listIndex]
     }
     
-    func setCompletion(itemId: Int64) throws {
+    func setCompletion(itemId: Int64, listIndex: Int, index: Int) throws {
         do {
             try db?.updateCompletion(itemId: itemId)
-            print("tried to set completion")
+            self.TodoListList[listIndex].getItem(index: index).setCompletion()
         } catch  {
             throw error
         }

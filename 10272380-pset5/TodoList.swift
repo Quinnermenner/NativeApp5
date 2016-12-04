@@ -45,4 +45,13 @@ class TodoList {
         return self.list
     }
     
+    func getItemCount() -> Int {
+        
+        return self.list.count
+    }
+    
+    func getItem(index: Int) -> TodoItem {
+        
+        return self.list[index]
+    }
 }
